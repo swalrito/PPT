@@ -1,0 +1,68 @@
+body{
+	background-color: #6D6D6D;
+}
+
+.container{
+	position: absolute;
+	width: 1000px;
+	height: 800px;
+	left: 50%;
+	top: 50%;
+	margin-left: -500px;
+	margin-top: -400px;
+	overflow: hidden;
+}
+.container ul{
+	position: relative;
+	width: 4000px;
+}
+.container ul li{
+	float: left;
+	width: 1000px;
+}
+.container ul li .content{
+	width: 1000px;
+	height: 800px;
+	background-color: #fff;
+}
+
+.button{
+	position: absolute;
+	width: 160px;
+	height: 160px;
+	right:  100px;
+	bottom: 20px;
+}
+.button span{
+	position: absolute;
+	display: inline-block;
+	width: 30px;
+	height: 64px;
+	border: 1px solid #000;
+	cursor: pointer;
+}
+.button span.up{
+	left: 50%;
+	margin-left: -15px;
+}
+.button span.right{
+	transform: rotateZ(90deg);
+	right: 17px;
+	top: 50%;
+	margin-top: -32px;
+}
+.button span.down{
+	transform: rotateZ(180deg);
+	left: 50%;
+	margin-left: -15px;
+	bottom: 0px;
+}
+.button span.left{
+	transform: rotateZ(270deg);
+	left: 17px;
+	top: 50%;
+	margin-top: -32px;
+}
+.choose{
+	background-color: #0058FF;
+}
