@@ -14,29 +14,43 @@ var cul=0;
 		if($(e.target).hasClass('right')){
 			row++;
 			//是否移动
-			var move=position(row,cul);
+			var move=position(row,cul,event);
 			if(move==false) {
 				row--;
 				return false;
 			}
+			if(content[row][cul]==undefined){
+				$('ul').animate({left:'-='+li_width+'px'},0);
+			}
+			else {
+				$('ul').animate({left:'-='+li_width+'px'});
+			}
+			$('ul').animate({top:'0px'},0);
+			cul=0;
 			changeColor();
-			$('ul').animate({left:'-='+li_width+'px'});
 		}
 		else if($(e.target).hasClass('left')){
 			row--;
 			//是否移动
-			var move=position(row,cul);
+			var move=position(row,cul,event);
 			if(move==false) {
 				row++;
 				return false;
 			}
+			if(content[row][cul]==undefined){
+				$('ul').animate({left:'+='+li_width+'px'},0);
+			}
+			else {
+				$('ul').animate({left:'+='+li_width+'px'});
+			}
+			$('ul').animate({top:'0px'},0);
+			cul=0;
 			changeColor();
-			$('ul').animate({left:'+='+li_width+'px'});
 		}
 		else if($(e.target).hasClass('down')){
 			cul++;
 			//是否移动
-			var move=position(row,cul);
+			var move=position(row,cul,event);
 			if(move==false) {
 				cul--;
 				return false;
@@ -47,7 +61,7 @@ var cul=0;
 		else if($(e.target).hasClass('up')){
 			cul--;
 			//是否移动
-			var move=position(row,cul);
+			var move=position(row,cul,event);
 			if(move==false) {
 				cul++;
 				return false;
@@ -65,19 +79,26 @@ $(function(){
 		if(event.keyCode==37){
 			row--;
 			//是否移动
-			var move=position(row,cul);
+			var move=position(row,cul,event);
 			if(move==false) {
 				row++;
 				return false;
 			}
+			if(content[row][cul]==undefined){
+				$('ul').animate({left:'+='+li_width+'px'},0);
+			}
+			else {
+				$('ul').animate({left:'+='+li_width+'px'});
+			}
+			$('ul').animate({top:'0px'},0);
+			cul=0;
 			changeColor();
-			$('ul').animate({left:'+='+li_width+'px'});
 		}
 		//上移动
 		else if(event.keyCode==38){
 			cul--;
 			//是否移动
-			var move=position(row,cul);
+			var move=position(row,cul,event);
 			if(move==false) {
 				cul++;
 				return false;
@@ -89,19 +110,26 @@ $(function(){
 		else if(event.keyCode==39){
 			row++;
 			//是否移动
-			var move=position(row,cul);
+			var move=position(row,cul,event);
 			if(move==false) {
 				row--;
 				return false;
 			}
+			if(content[row][cul]==undefined){
+				$('ul').animate({left:'-='+li_width+'px'},0);
+			}
+			else {
+				$('ul').animate({left:'-='+li_width+'px'});
+			}
+			$('ul').animate({top:'0px'},0);
+			cul=0;
 			changeColor();
-			$('ul').animate({left:'-='+li_width+'px'});
 		}
 		//下移动
 		else if(event.keyCode==40){
 			cul++;
 			//是否移动
-			var move=position(row,cul);
+			var move=position(row,cul,event);
 			if(move==false) {
 				cul--;
 				return false;
@@ -120,19 +148,30 @@ for(var i=0;i<li_lg;i++){
 	content.push(contetn_li);
 	content_li=null;
 	}
-function position(row,cul){
+function position(row,cul,event){
 	if(row<0||cul<0) return false;
 	if(row>=li_lg) return false;
-	if(content[row][cul]==undefined) return false;
+	if($(event.target).hasClass('right')||$(event.target).hasClass('left')){
+		if(content[row][0]==undefined) return false;
+	}
+	if($(event.target).hasClass('up')||$(event.target).hasClass('down')){
+		if(content[row][cul]==undefined) return false;
+	}
+	if(event.keyCode==37||event.keyCode==39){
+		if(content[row][0]==undefined) return false;
+	}
+	if(event.keyCode==38||event.keyCode==40){
+		if(content[row][cul]==undefined) return false;
+	}
 }
 
 <!--判断幻灯片位置，显示按钮颜色-->
 function changeColor(){
 	$('span').addClass('choose');
-	if(row-1<0||content[row-1][cul]==undefined){
+	if(row-1<0){
 		$(".left").removeClass('choose');
 	}
-	if(row+1>=li_lg||content[row+1][cul]==undefined){
+	if(row+1>=li_lg){
 		$(".right").removeClass('choose');
 	}
 	if(cul-1<0||content[row][cul-1]==undefined){
