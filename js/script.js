@@ -58,6 +58,60 @@ var cul=0;
 	})
 })();
 
+<!--键盘方向键控制幻灯片方向-->
+$(function(){
+	$('body').bind('keyup',function(event){
+		//左移动
+		if(event.keyCode==37){
+			row--;
+			//是否移动
+			var move=position(row,cul);
+			if(move==false) {
+				row++;
+				return false;
+			}
+			changeColor();
+			$('ul').animate({left:'+='+li_width+'px'});
+		}
+		//上移动
+		else if(event.keyCode==38){
+			cul--;
+			//是否移动
+			var move=position(row,cul);
+			if(move==false) {
+				cul++;
+				return false;
+			}
+			changeColor();
+			$('ul').animate({top:'+='+li_height+'px'});
+		}
+		//右移动
+		else if(event.keyCode==39){
+			row++;
+			//是否移动
+			var move=position(row,cul);
+			if(move==false) {
+				row--;
+				return false;
+			}
+			changeColor();
+			$('ul').animate({left:'-='+li_width+'px'});
+		}
+		//下移动
+		else if(event.keyCode==40){
+			cul++;
+			//是否移动
+			var move=position(row,cul);
+			if(move==false) {
+				cul--;
+				return false;
+			}
+			changeColor();
+			$('ul').animate({top:'-='+li_height+'px'});
+		}
+	})
+})
+
 <!--根据幻灯片位置，决定是否能够移动-->
 var content=new Array();//幻灯片内容存为一个数组
 var li_lg=$('li').length;
